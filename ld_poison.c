@@ -6,7 +6,11 @@
 #include <unistd.h>
 #include <errno.h>
 #include <sys/socket.h>
+#ifdef __FreeBSD__
+#include <net/if.h>
+#else
 #include <linux/if.h>
+#endif
 #include <string.h>
 
 /* Dirty hack */
