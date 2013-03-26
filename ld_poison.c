@@ -6,11 +6,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <sys/socket.h>
-#ifdef __FreeBSD__
-#include <net/if.h>
-#else
 #include <linux/if.h>
-#endif
 #include <string.h>
 
 /* Dirty hack */
@@ -22,7 +18,8 @@
 char mac[] = "aa:bb:cc:dd:ee:ff";
 
 static void init (void) __attribute__ ((constructor));
-static int (*o_ioctl) (int __fd, unsigned long int __request, void *);
+static int (*o_ioctl) (int, unsigned long int, ...);
+int ioctl (int, unsigned long int, void *);
 
 void init(void)
 {
